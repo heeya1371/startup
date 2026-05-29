@@ -1,66 +1,195 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Malgun Gothic', sans-serif;
+    background-color: #f5f7fa; 
+    color: #333333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.header-nav header {
+    text-align: center;
+    padding: 20px 0 30px 0;
+}
+
+.header-nav h1 {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    font-weight: 800;
+}
+
+.footer {
+    text-align: center;
+    padding: 30px 0;
+    color: #95a5a6;
+    font-size: 0.85rem;
+    margin-top: 40px;
+    border-top: 1px solid #e2e8f0;
+}
+
 /* =================================================================
-   3. 메인 레이아웃 (Flexbox - PC 기준: 위 지도 / 아래 리스트+후기)
+   레이아웃 핵심: PC와 모바일 모두 위에서 아래로(column) 뚝 떨어지는 구조
    ================================================================= */
 .main-container {
-    max-width: 1300px;
+    max-width: 800px; /* 세로형 레이아웃에 맞춰 전체 컨테이너 폭을 슬림하고 보기 좋게 축소 */
     margin: 0 auto;
 }
 
-/* 1. 전체 틀을 세로 정렬(column)로 짜서 지도가 무조건 위로 가게 만듭니다 */
+/* 전체 요소를 가로 배치(flex-direction: row) 하지 않고 세로(column)로 쌓아 내립니다 */
 .content-body {
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
 
-/* 2. PC화면에서 지도가 상단에 와이드하게 가득 차도록 설정 */
 .map-container {
     width: 100%;
 }
 
 #map {
     width: 100%;
-    height: 500px; /* PC에서 보기 시원한 정적 높이 */
+    height: 450px; /* 깔끔하게 화면에 매칭되는 지도 높이 */
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     border: 1px solid #e2e8f0;
-    background-color: #e5e9f0;
 }
 
-/* 3. ★ 핵심: 지도 밑에 있는 패널을 가로 정렬(row)로 배치 */
+/* 지도 밑으로 순서대로 쌓이는 카드 영역 패널 */
 .side-panel {
     width: 100%;
     display: flex;
-    flex-direction: row; /* 맛집 목록과 후기 상자가 좌우로 나란히 배치됨 */
+    flex-direction: column;
     gap: 24px;
-    align-items: flex-start;
 }
 
-/* 4. 좌우로 배치된 두 카드가 반반씩(50%씩) 균등하게 공간을 차지 */
 .rank-list, .review-box {
-    flex: 1; 
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    border: 1px solid #edf2f7;
 }
 
+.rank-list h3, .review-box h3 {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
 /* =================================================================
-   8. 반응형 미디어 쿼리 (모바일 기준 - 원래 이미지 스타일 유지)
+   맛집 아이템 리스트 디자인
    ================================================================= */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-    
-    #map {
-        height: 380px; /* 모바일 화면에 맞춘 지도 높이 */
-    }
-    
-    /* 화면이 좁아지면 밑에 있던 두 카드를 다시 세로 한 줄로 떨어뜨립니다 */
-    .side-panel {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .rank-list, .review-box {
-        width: 100%;
-    }
+#restaurant-data {
+    max-height: 350px; /* 세로형 배열이므로 리스트를 좀 더 길고 시원하게 볼 수 있도록 조정 */
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.restaurant-item {
+    padding: 14px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #f8fafc;
+    border: 1px solid #f1f5f9;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.restaurant-item:hover {
+    background-color: #edf2f7;
+    transform: translateY(-2px);
+}
+
+.restaurant-item h4 {
+    font-size: 1.05rem;
+    color: #1a0dab;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.restaurant-item p {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+/* 카테고리 태그 뱃지 스타일 */
+.badge {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #fff;
+}
+.badge.korean { background-color: #e67e22; }
+.badge.western { background-color: #3498db; }
+.badge.japanese { background-color: #9b59b6; }
+.badge.cafe { background-color: #2ecc71; }
+
+/* =================================================================
+   익명 후기 입력 폼 및 타임라인 디자인
+   ================================================================= */
+#review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#review-form input[type="text"], 
+#review-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background-color: #f8fafc;
+}
+
+#review-form textarea {
+    height: 70px;
+    resize: none;
+}
+
+#review-form button {
+    padding: 10px;
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#review-form button:hover { background-color: #2b6cb0; }
+
+#review-timeline {
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    border-top: 1px dashed #e2e8f0;
+    padding-top: 12px;
+}
+
+#review-timeline li {
+    padding: 8px 10px;
+    background: #f8fafc;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    border-left: 3px solid #cbd5e1;
+}
+
+#review-timeline li strong {
+    color: #4a5568;
+    font-size: 0.8rem;
+    display: block;
 }

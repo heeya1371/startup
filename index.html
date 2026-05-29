@@ -6,7 +6,7 @@
     <title>학교 근처 맛집 찾기</title>
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56382561c6babd2d2e56a8a7fb588c52"></script>
-    </head>
+</head>
 <body>
     <div class="main-container">
         <div class="header-nav">
@@ -16,33 +16,69 @@
         </div>
 
         <div class="content-body">
+            
             <div class="map-container">
-                <div id="map" style="width:100%; height:100%; min-height:400px;"></div>
+                <div id="map"></div>
             </div>
             
             <div class="side-panel">
+                
                 <div class="rank-list">
                     <h3>📍 추천 맛집 목록</h3>
-                    <div id="restaurant-data"></div>
+                    <div id="restaurant-data">
+                        
+                        <div class="restaurant-item" onclick="panToPlace(35.8352, 128.5815)">
+                            <h4>달콤이 <span class="badge korean">분식식</span></h4>
+                            <p>위치: 대구 남구 현충로 120 (정문 도보 8분)</p>
+                            <p>특징: 오므라이스 개에바</p>
+                        </div>
+
+                        <div class="restaurant-item" onclick="panToPlace(35.8365, 128.5842)">
+                            <h4>거 칼국시집<span class="badge western">한식</span></h4>
+                            <p>위치: 대구 남구 명덕로 84 (후분 도보 5분)</p>
+                            <p>특징: 해산물 육수 베이스니까 알레르기 조심해라</p>
+                        </div>
+
+                        <div class="restaurant-item" onclick="panToPlace(35.8331, 128.5802)">
+                            <h4>그라찌에<span class="badge japanese">카페</span></h4>
+                            <p>위치: 컴정관 옆</p>
+                            <p>특징: 초코라떼에 휘핑 올려줌</p>
+                        </div>
+
+                        <div class="restaurant-item" onclick="panToPlace(35.8341, 128.5828)">
+                            <h4>커리어 카페인 <span class="badge cafe">카페</span></h4>
+                            <p>📍 위치: 대구 남구 중앙대로 31길 15 (ICT 관 뒤편)</p>
+                            <p>📝 특징: 시험 기간 카공족들을 위한 조용하고 세련된 분위기.</p>
+                        </div>
+
+                    </div>
                 </div>
                 
                 <div class="review-box">
                     <h3>✍️ 익명 후기 작성</h3>
-                    <form id="review-form">
+                    <form id="review-form" onsubmit="return false;">
                         <input type="text" id="review-author" placeholder="닉네임 (익명)" required>
                         <textarea id="review-text" placeholder="솔직한 맛 평가를 남겨주세요!" required></textarea>
-                        <button type="submit">후기 등록</button>
+                        <button type="submit" onclick="addReview()">후기 등록</button>
                     </form>
                     
-                    <ul id="review-timeline"></ul>
+                    <ul id="review-timeline">
+                        <li>
+                            <strong>ㄳㅎ</strong>
+                            <p>칼국시집 갔다가 뒤질뻔함</p>
+                        </li>
+                        <li>
+                            <strong>ㅅㅈㅇ</strong>
+                            <p>점메추</p>
+                        </li>
+                        <li>
+                            <strong>ㅅㅎㅈ</strong>
+                            <p>칼국시집 저희 언니 죽일뻔했어요</p>
+                        </li>
+                    </ul>
                 </div>
+
             </div>
-        </div>
-        
-        <div class="footer">
-            <footer>
-                <p>© 2026 커리어 패스파인더. All rights reserved.</p>
-            </footer>
         </div>
     </div>
 
