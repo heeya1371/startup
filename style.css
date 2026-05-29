@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.content-body {
+    display: flex;
+    gap: 20px;
+}
+.map-container { flex: 1.5; } /* 지도를 조금 더 넓게 */
+.side-panel { flex: 1; }
+
+/* 6월 계획서 반영: 모바일 화면을 위한 반응형 웹 미디어 쿼리 */
+@media (max-width: 768px) {
+    .content-body {
+        flex-direction: column; /* 모바일에서는 위아래로 배치 */
+    }
+}
